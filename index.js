@@ -7,32 +7,6 @@ const fs = require("fs");
 const questions = [
   {
     type: "input",
-    name: "username",
-    message: "enter github username",
-    validate: (usernameInput) => {
-      if (usernameInput) {
-        return true;
-      } else {
-        console.log("please enter username");
-        return false;
-      }
-    },
-  },
-  {
-    type: "input",
-    name: "email",
-    message: "enter your email",
-    validate: (emailInput) => {
-      if (emailInput) {
-        return true;
-      } else {
-        console.log("please enter email");
-        return false;
-      }
-    },
-  },
-  {
-    type: "input",
     name: "title",
     message: "enter your project title",
     validate: (titleInput) => {
@@ -46,6 +20,33 @@ const questions = [
   },
   {
     type: "input",
+    name: "username",
+    message: "enter github username",
+    validate: (githubInput) => {
+      if (githubInput) {
+        return true;
+      } else {
+        console.log("please enter username");
+        return false;
+      }
+    },
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "enter your email",
+    validate: (githubInput) => {
+      if (githubInput) {
+        return true;
+      } else {
+        console.log("please enter email");
+        return false;
+      }
+    },
+  },
+
+  {
+    type: "input",
     name: "what",
     message: "what problem does your project solve?",
     validate: (whatInput) => {
@@ -53,6 +54,19 @@ const questions = [
         return true;
       } else {
         console.log("please describe what your project is");
+        return false;
+      }
+    },
+  },
+  {
+    type: "input",
+    name: "why",
+    message: "Why did you create this project? (Required)",
+    validate: (whyInput) => {
+      if (whyInput) {
+        return true;
+      } else {
+        console.log("Please enter why you created this project!");
         return false;
       }
     },
@@ -84,15 +98,67 @@ const questions = [
     },
   },
   {
+    type: "input",
+    name: "usage",
+    message: "Please provide instructions and examples for use. (Required)",
+    validate: (usageInput) => {
+      if (usageInput) {
+        return true;
+      } else {
+        console.log("Please enter your use instructions!");
+        return false;
+      }
+    },
+  },
+  {
     type: "list",
     name: "license",
     message: "Which license will you use for your project?",
     choices: ["agpl", "apache", "mit", "no license"],
   },
+  {
+    type: "confirm",
+    name: "confirmContributers",
+    message: "Would you like to allow other developers to contribute?",
+    default: true,
+  },
+  {
+    type: "input",
+    name: "contribute",
+    message: "Please provide guidelines for contributing. (Required)",
+    when: ({ confirmContributers }) => {
+      if (confirmContributers) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    validate: (contributerInput) => {
+      if (contributerInput) {
+        return true;
+      } else {
+        console.log("Please enter contributer guidelines!");
+        return false;
+      }
+    },
+  },
+  {
+    type: "input",
+    name: "test",
+    message: "Please provide instructions on how to test the app. (Required)",
+    validate: (testInput) => {
+      if (testInput) {
+        return true;
+      } else {
+        console.log("Please enter your use test instructions!");
+        return false;
+      }
+    },
+  },
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileContent) {
+function writeFile(fileContent) {
   return new Promise((resolve, reject) => {
     fs.writeFile("./dist/generated-README.md", fileContent, (err) => {
       if (err) {
@@ -122,7 +188,7 @@ init()
     return generateMarkdown(readmeData);
   })
   .then((pageMD) => {
-    return writeToFile(pageMD);
+    return writeFile(pageMD);
   })
   .then((writeFileResponse) => {
     console.log(writeFileResponse.message);

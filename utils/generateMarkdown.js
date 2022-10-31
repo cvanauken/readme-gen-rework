@@ -1,3 +1,15 @@
+function renderContributingSection(confirmContributers, data) {
+  if (!confirmContributers) {
+    return `
+    Thank you for your interest in helping out; however, I will not be accepting contributions from third parties.
+      `;
+  } else {
+    return `
+    ${data}
+      `;
+  }
+}
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
@@ -33,6 +45,16 @@ function renderLicenseSection(license) {
     
       ${renderLicenseLink(license)}
         `;
+  } else {
+    return " ";
+  }
+}
+
+function renderLicenseTOC(license) {
+  if (license !== "no license") {
+    return `
+    * [License](#license)
+      `;
   } else {
     return " ";
   }
@@ -78,9 +100,9 @@ function generateMarkdown(data) {
     ${renderLicenseSection(data.license)}
   
     ## [Contributing](#table-of-contents)
-    
+
     ${renderContributingSection(data.confirmContributers, data.contribute)}
-  
+    
     ## [Tests](#table-of-contents)
   
     ${data.test}
