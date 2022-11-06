@@ -47,43 +47,19 @@ const questions = [
 
   {
     type: "input",
-    name: "what",
-    message: "what problem does your project solve?",
-    validate: (whatInput) => {
-      if (whatInput) {
+    name: "description",
+    message:
+      "Describe your project, what is it, how does it work, why did you build it?",
+    validate: (descriptionInput) => {
+      if (descriptionInput) {
         return true;
       } else {
-        console.log("please describe what your project is");
+        console.log("please describe your project");
         return false;
       }
     },
   },
-  {
-    type: "input",
-    name: "why",
-    message: "Why did you create this project? (Required)",
-    validate: (whyInput) => {
-      if (whyInput) {
-        return true;
-      } else {
-        console.log("Please enter why you created this project!");
-        return false;
-      }
-    },
-  },
-  {
-    type: "input",
-    name: "how",
-    message: "how will your project solve this problem",
-    validate: (howInput) => {
-      if (howInput) {
-        return true;
-      } else {
-        console.log("please describe how your project works");
-        return false;
-      }
-    },
-  },
+
   {
     type: "input",
     name: "installation",
