@@ -81,7 +81,7 @@ const questions = [
       if (usageInput) {
         return true;
       } else {
-        console.log("Please enter your use instructions!");
+        console.log("Please enter usage examples");
         return false;
       }
     },
@@ -120,13 +120,13 @@ const questions = [
   },
   {
     type: "input",
-    name: "test",
+    name: "credit",
     message: "Please provide instructions on how to test the app. (Required)",
-    validate: (testInput) => {
-      if (testInput) {
+    validate: (creditInput) => {
+      if (creditInput) {
         return true;
       } else {
-        console.log("Please enter your use test instructions!");
+        console.log("Please enter repository info");
         return false;
       }
     },
